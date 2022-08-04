@@ -41,7 +41,7 @@ jobs:
       - name: Build and push Terraform:${{ matrix.version }}
         uses: docker/build-push-action@v2
         with:
-          context: ${{ matrix.version }}
+          context: .
           push: true
           tags: stangirard/pre-commit-terraform:${{ matrix.version }}-${{ steps.vars.outputs.tag }}, stangirard/pre-commit-terraform:${{ matrix.version }}-latest
           build-args: |
