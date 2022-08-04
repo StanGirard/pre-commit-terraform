@@ -1,0 +1,63 @@
+#!/bin/sh
+
+set -x -eo pipefail
+
+###
+# Installations
+###
+
+apk add --no-cache curl make git python3 py3-pip bash ca-certificates perl gcc python3-dev musl-dev
+
+pip3 install --no-cache --upgrade setuptools wheel --user
+pip3 install pre-commit --user
+ln -s /root/.local/bin/pre-commit /usr/bin/pre-commit
+chmod +x /usr/bin/pre-commit
+
+curl -sSLo /tmp/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz \
+  https://github.com/segmentio/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
+tar --directory /usr/local/bin/ -xzf /tmp/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz terraform-docs
+chmod +x /usr/local/bin/terraform-docs
+
+curl -sSLo /tmp/tflint${TFLINT_VERSION}.zip \
+  https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/tflint_linux_amd64.zip
+unzip /tmp/tflint${TFLINT_VERSION}.zip -d /tmp
+install -m 755 /tmp/tflint /usr/local/bin/
+
+curl -sSLo /usr/local/bin/tfsec \
+  https://github.com/tfsec/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64
+chmod +x /usr/local/bin/tfsec
+
+curl -sSLo /resources/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+  https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+unzip /resources/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin
+
+curl -sSLo /resources/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+  https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
+tar -xzf /resources/helm-v${HELM_VERSION}-linux-amd64.tar.gz
+install -m 755 linux-amd64/helm /usr/local/bin/
+
+###
+# Cleaning image
+###
+
+apk del --no-cache curl
+
+###
+# CIS Hardening
+###
+
+chmod 0600 /etc/shadow
+
+touch /etc/login.defs
+chmod 0444 /etc/login.defs
+
+###
+# Test
+###
+
+pre-commit --version
+terraform-docs --version
+tflint --version
+tfsec --version
+helm version
+terraform --version
