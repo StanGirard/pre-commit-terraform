@@ -30,6 +30,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
+          images: |
+            stangirard/pre-commit-terraform
           tags: |
             type=ref,event=branch
             type=ref,event=pr
