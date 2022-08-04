@@ -1,4 +1,4 @@
-name: Precommit
+name: Build & Push Docker Images
 
 on:
   push:
