@@ -32,10 +32,14 @@ jobs:
         with:
           images: |
             stangirard/pre-commit-terraform
+          flavor: |
+            latest=false
+            prefix=${{ matrix.version }}-
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=semver,pattern=${{ matrix.version }}-{{version}}
+            type=semver,pattern={{version}}
+            type=raw,value=latest
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
