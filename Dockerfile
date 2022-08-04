@@ -16,8 +16,6 @@ ENV BASH_VERSION=5.1.4-r0 \
     TERRAFORM_DOCS_VERSION=v0.16.0
 
 VOLUME /data
-https://github.com/terraform-linters/tflint/releases/download/v0.39.1/tflint_darwin_amd64.zip
- https://github.com/ytdl-org/youtube-dl/releases/latest/download/youtube-dl.exe.
 ADD ./resources /resources
 
 RUN /resources/build && rm -rf /resources
