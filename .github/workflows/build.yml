@@ -4,7 +4,7 @@ on:
   push:
     # run only against tags
     tags:
-      - '*'
+      - 'v*'
 
 permissions:
   contents: write
@@ -12,8 +12,11 @@ permissions:
   # issues: write
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
+    environment: production
+
     strategy:
       matrix:
         version: [1.2.3]
