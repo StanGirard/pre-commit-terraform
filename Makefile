@@ -13,6 +13,6 @@ lint:
 
 ## release: Release a new version
 .PHONY: release
-release: test
+release: lint
 	git tag -a "v$(VERSION)" -m "$(VERSION)"
 	git push origin "v$(VERSION)"
