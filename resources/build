@@ -19,12 +19,12 @@ tar --directory /usr/local/bin/ -xzf /tmp/terraform-docs-${TERRAFORM_DOCS_VERSIO
 chmod +x /usr/local/bin/terraform-docs
 
 curl -sSLo /tmp/tflint${TFLINT_VERSION}.zip \
-  https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/tflint_linux_amd64.zip
+  https://github.com/terraform-linters/tflint/releases/latest/download/tflint_linux_amd64.zip
 unzip /tmp/tflint${TFLINT_VERSION}.zip -d /tmp
 install -m 755 /tmp/tflint /usr/local/bin/
 
 curl -sSLo /usr/local/bin/tfsec \
-  https://github.com/tfsec/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64
+  https://github.com/tfsec/tfsec/releases/latest/download/tfsec-linux-amd64
 chmod +x /usr/local/bin/tfsec
 
 curl -sSLo /resources/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \

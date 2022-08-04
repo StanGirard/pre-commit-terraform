@@ -13,13 +13,11 @@ ENV BASH_VERSION=5.1.4-r0 \
     PYTHON3_VERSION=3.9.5-r2 \
     PYTHON3_PIP_VERSION=20.3.4-r1 \
     TERRAFORM_VERSION=${RELEASE} \
-    TERRAFORM_DOCS_VERSION=v0.16.0 \
-    TFLINT_VERSION=v0.39.1 \
-    TFSEC_VERSION=1.27.1 \
-    CHECKOV_VERSION=2.1.94
+    TERRAFORM_DOCS_VERSION=v0.16.0
 
 VOLUME /data
-
+https://github.com/terraform-linters/tflint/releases/download/v0.39.1/tflint_darwin_amd64.zip
+ https://github.com/ytdl-org/youtube-dl/releases/latest/download/youtube-dl.exe.
 ADD ./resources /resources
 
 RUN /resources/build && rm -rf /resources
