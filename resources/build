@@ -6,7 +6,7 @@ set -x -eo pipefail
 # Installations
 ###
 
-apk add --no-cache curl make git python3 py3-pip bash ca-certificates perl gcc python3-dev musl-dev
+apk add --no-cache curl make git python3 py3-pip bash ca-certificates perl gcc python3-dev musl-dev nodejs npm
 
 pip3 install --no-cache --upgrade setuptools wheel --user
 pip3 install pre-commit --user
@@ -36,6 +36,7 @@ curl -sSLo /resources/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
 tar -xzf /resources/helm-v${HELM_VERSION}-linux-amd64.tar.gz
 install -m 755 linux-amd64/helm /usr/local/bin/
 
+npm i -g standard-version
 ###
 # Cleaning image
 ###
